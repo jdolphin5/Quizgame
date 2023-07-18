@@ -1,0 +1,8 @@
+# ignore node dependencies
+node_modules/
+
+# ignore log files
+*.log
+
+# Ignore build artifacts
+dist/
