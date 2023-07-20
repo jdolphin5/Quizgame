@@ -7,9 +7,9 @@ const App: React.FC = () => {
       <h1>Welcome to My Quiz GameAA</h1>
       <h2>Question X</h2>
       <p>What is the capital of France?</p>
-      <Radio />
       <ul>
         <li>Londona</li>
+        <Radio />
         <li>Paris</li>
         <li>Berlin</li>
         <li>Madrid</li>
