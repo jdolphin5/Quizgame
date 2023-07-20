@@ -4,3 +4,6 @@
     font-family: Arial;
     text-align: center;
 }
+ul {
+    display:inline-block;
+}
