@@ -4,6 +4,8 @@ import { Radio, FormLabel, RadioGroup, FormControl, FormControlLabel,
 } from '@mui/material';
 import { useState } from 'react';
 
+let correctApplied = false;
+
 function createData(
   username: string,
   score: number,
@@ -16,18 +18,21 @@ const data = [
   createData("Patrick", 1),
 ];
 
-
-
 const App: React.FC = () => {
 
   const [ansCorrectCount, setAnsCorrect] = useState(0);
+  let selectedAns: string = "-1";
+  const correctAns: string = "1";
 
-  function handleChange() {
-    setAnsCorrect(ansCorrectCount + 1);
+  const handleChange = (event: any) => {
+    selectedAns = event.target.value;
+    if (selectedAns === correctAns && !correctApplied) {
+      setAnsCorrect(ansCorrectCount + 1);
+      correctApplied = true;
+    }
   }
 
   return (
-
     <div className = 'root'>
       <h1>Welcome to My Quiz GameAA</h1>
       <h2>Question X</h2>
@@ -36,7 +41,7 @@ const App: React.FC = () => {
       <FormControl>
         <FormLabel id="questionForm">Answers:</FormLabel>
         <RadioGroup aria-labelledby="questionLabel" name="radio-buttons-group">
-          <FormControlLabel value="London" control={<Radio />} label="London" onChange={handleChange}/>
+          <FormControlLabel value="1" control={<Radio />} label="London" onChange={handleChange}/>
           <FormControlLabel value="Paris" control={<Radio />} label="Paris" />
           <FormControlLabel value="Madrid" control={<Radio />} label="Madrid" />
           <FormControlLabel value="New York" control={<Radio />} label="New York" />
