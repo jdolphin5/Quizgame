@@ -22,26 +22,27 @@ const data = [
 const ControlArea: React.FC<PlayerBoardProps> = ({ sharedState, setSharedState }) => {
     return (
         <div>
-            <TableContainer className="ans_table_container">
+            <h1 className="header1" style={{color : "#ffffff"}}>Scoreboard</h1>
+            <TableContainer className="ansTableContainer">
                 <Table sx={{width:200}} aria-label="myTable">
                 <TableHead>
-                    <TableRow sx={{border: 1, color:'black'}}>
-                    <TableCell align="right">Username</TableCell>
-                    <TableCell align="right">Score</TableCell>
+                    <TableRow sx={{border: 1, color:'gray'}}>
+                    <TableCell sx={{color:"#ffffff"}} align="left">Username</TableCell>
+                    <TableCell sx={{color:"#ffffff"}} align="left">Score</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {
                     data.map((row) => (
                         <TableRow key={row.username} sx={{border: 1, color:'gray'}}>
-                        <TableCell align="right">{row.username}</TableCell>
-                        <TableCell align="right">{row.score}</TableCell>
+                        <TableCell sx={{color:"#ffffff"}} align="left">{row.username}</TableCell>
+                        <TableCell sx={{color:"#ffffff"}} align="left">{row.score}</TableCell>
                         </TableRow>
                     ))
                     }
                     <TableRow sx={{border: 1, color:'gray'}}>
-                    <TableCell align="right">HookUser</TableCell>
-                    <TableCell align="right">{sharedState}</TableCell>
+                    <TableCell sx={{color:"#ffffff"}} align="left">HookUser</TableCell>
+                    <TableCell sx={{color:"#ffffff"}} align="left">{sharedState}</TableCell>
                     </TableRow>
                 </TableBody>
                 </Table>
