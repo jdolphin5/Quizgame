@@ -1,36 +1,27 @@
 .root {
     position : absolute;
     height : 750px;
-    /* Align upper-left corner to center on page. */
     left : 50%;
     top : 50%;
-    /* Now transform it to shift it up and left by 50% it's dimensions, thereby centering it. */
     transform : translate(-50%, -50%);
-    /* Border. */
-    border : 2px solid #0000ff;
-    /* Round corners. */
+    border : 2px solid #00ff37;
     border-radius : 10px 10px 10px 10px;
     -moz-border-radius : 10px 10px 10px 10px;
     -webkit-border-radius : 10px 10px 10px 10px;
-    /* Define grid layout. */
     display : grid;
-    grid-template-columns : 750px 300px;
-    /* Shadow. */
+    grid-template-columns : 750px 300px; /*column widths*/
 }
   
-/* The player's board area. */
 .playerBoard {
     grid-column : 1 / 2;
 }
   
-/* Control area. */
 .controlArea {
     height : 240px;
     margin : 10px;
     padding : 10px;
-    grid-column : 2 / 3;
-    border : 1px solid #000000;
-    /* Round corners. */
+    grid-column : 2 / 2;
+    border : 1px solid #346b32;
     border-radius : 10px 10px 10px 10px;
     -moz-border-radius : 10px 10px 10px 10px;
     -webkit-border-radius : 10px 10px 10px 10px;
@@ -42,6 +33,6 @@ ul {
 
 .ans_table_container {
     display: flex;
-    justify-content: center;
-    align-items: center; 
+    justify-content: left;
+    align-items: left; 
 }
