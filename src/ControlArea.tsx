@@ -21,7 +21,6 @@ const data = [
 
 const ControlArea: React.FC<PlayerBoardProps> = ({ sharedState, setSharedState }) => {
     return (
-        
         <div>
             <TableContainer className="ans_table_container">
                 <Table sx={{width:200}} aria-label="myTable">
