@@ -7,4 +7,7 @@ node_modules/
 # Ignore build artifacts
 dist/
 
+# Ignore project design documents
+docs/
+
 package-lock.json
