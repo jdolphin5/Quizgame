@@ -1,0 +1,22 @@
+INSERT INTO answer (question_id, answer_text, is_correct)
+VALUES
+  (1, 'Roger Federer', true),
+  (1, 'Rafael Nadal', false),
+  (1, 'Novak Djokovic', false),
+  (1, 'Pete Sampras', false),
+  (2, 'Rafael Nadal', true),
+  (2, 'Novak Djokovic', false),
+  (2, 'Roger Federer', false),
+  (2, 'Andy Murray', false),
+  (3, 'Serena Williams', true),
+  (3, 'Maria Sharapova', false),
+  (3, 'Steffi Graf', false),
+  (3, 'Martina Navratilova', false),
+  (4, 'Grass', true),
+  (4, 'Clay', false),
+  (4, 'Hard', false),
+  (4, 'Carpet', false),
+  (5, '1', false),
+  (5, '2', true),
+  (5, '4', false),
+  (5, '6', false);
