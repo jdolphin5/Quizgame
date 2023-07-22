@@ -5,12 +5,19 @@ import { Radio, FormLabel, RadioGroup, FormControl, FormControlLabel
 interface PlayerBoardProps {
     sharedState: number;
     setSharedState: React.Dispatch<React.SetStateAction<number>>;
+    quizData: any[];
+    setQuizData: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
 let correctApplied = false;
 
-const PlayerBoard: React.FC<PlayerBoardProps> = ({ sharedState, setSharedState }) => {
-    
+const PlayerBoard: React.FC<PlayerBoardProps> = ({ sharedState, setSharedState, quizData, setQuizData }) => {
+    if (quizData.length === 0) {
+        return <div>Loading...</div>;
+    }
+
+    const quizTitle = quizData[0].title;
+
     let selectedAns: string = "-1";
     const correctAns: string = "1";
   
@@ -24,7 +31,10 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({ sharedState, setSharedState }
     return (
         <div>
             <div className="header2">
-                <div className="gameName">Quiz Game</div>
+                <div className="gameName">
+                    Quiz Game 
+                    {quizTitle}
+                </div>
                 <div className="quizName">Geography Quiz</div>
                 <div className="timer">Reading Timer: <p>10</p></div>
             </div>
