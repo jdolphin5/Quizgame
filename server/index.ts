@@ -1,8 +1,8 @@
-const express = require('express');
+const path = require('path'); // Add the 'path' module
+const express = require("express");
 const app = express();
 const { Pool } = require('pg');
 const cors = require('cors');
-const path = require('path'); // Add the 'path' module
 
 //app.set('quiet', false);
 
@@ -26,7 +26,6 @@ app.use(express.static(distPath));
 
 // Remember that security is crucial when setting up a server-side API.
 // Make sure to validate user input and sanitize SQL queries to prevent SQL injection attacks.
-
 
 app.get('/api/quiz', async (req: any, res: any) => {
   try {
