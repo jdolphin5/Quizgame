@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "quizgame",
   "main": "./src/app.tsx",
-  "proxy": "http://localhost:3000",
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development --open"
