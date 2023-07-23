@@ -9,7 +9,8 @@ const App: React.FC = () => {
   const [sharedState, setSharedState] = useState(0);
   
   useEffect(() => {
-    axios.get('http://localhost:3000/api/quiz') // Send a GET request to your server's /api/quiz route
+    const id = 1;
+    axios.get(`http://localhost:3000/api/quiz/${id}`) // Send a GET request to your server's /api/quiz route
       .then((response: any) => {
         setQuizData(response.data); // Update the state with the fetched quiz data
       })

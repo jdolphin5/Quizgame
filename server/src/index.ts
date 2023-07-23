@@ -27,11 +27,12 @@ app.use(express.static(distPath));
 // Remember that security is crucial when setting up a server-side API.
 // Make sure to validate user input and sanitize SQL queries to prevent SQL injection attacks.
 
-app.get('/api/quiz', async (req: any, res: any) => {
+app.get('/api/quiz/:id', async (req: any, res: any) => {
   try {
-    console.log('trying get request');
+    const quizId = req.params.id;
+    console.log("GET /api/quiz/", req.params.id);
     const client = await pool.connect();
-    const query = 'SELECT * FROM quiz;';
+    const query = `SELECT * FROM quiz WHERE quiz_id = ${quizId};`;
     const result = await client.query(query);
     client.release();
     res.json(result.rows);
