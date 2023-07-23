@@ -4,13 +4,25 @@ import { useState, useEffect } from 'react';
 import PlayerBoard from './PlayerBoard';
 import ControlArea from './ControlArea';
 
+interface QuizData {
+  quiz: {
+    quiz_id: number;
+    title: string;
+    category: string;
+    // Add any other properties of the quiz object here
+  };
+  questions: Array<any>;
+  answers: Array<any>;
+}
+
 const App: React.FC = () => {
-  const [quizData, setQuizData] = useState<any[]>([]);
+  const [quizData, setQuizData] = useState<QuizData | null>(null);
   const [sharedState, setSharedState] = useState(0);
   
   useEffect(() => {
-    const id = 1;
-    axios.get(`http://localhost:3000/api/quiz/${id}`) // Send a GET request to your server's /api/quiz route
+    const quizId = 1;
+    const numQuestions = 5;
+    axios.get(`http://localhost:3000/api/quiz/${quizId}/questions/${numQuestions}`) // Send a GET request to your server's /api/quiz route
       .then((response: any) => {
         setQuizData(response.data); // Update the state with the fetched quiz data
       })
@@ -21,7 +33,9 @@ const App: React.FC = () => {
   
   return (
     <div className = 'root'>
+      { quizData !== null && (
       <div className="playerBoard"><PlayerBoard sharedState={sharedState} quizData={quizData} setSharedState={setSharedState} setQuizData={setQuizData}/></div>
+      )}
       <div className="controlArea"><ControlArea sharedState={sharedState} setSharedState={setSharedState}/></div>
     </div>
   );

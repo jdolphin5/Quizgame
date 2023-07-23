@@ -2,21 +2,37 @@ import React from 'react';
 import { Radio, FormLabel, RadioGroup, FormControl, FormControlLabel
 } from '@mui/material';
 
+interface QuizData {
+    quiz: {
+      quiz_id: number;
+      title: string;
+      category: string;
+      // Add any other properties of the quiz object here
+    };
+    questions: Array<any>; // Replace 'any' with the correct type for a question
+    answers: Array<any>; // Replace 'any' with the correct type for an answer
+}
+
 interface PlayerBoardProps {
     sharedState: number;
     setSharedState: React.Dispatch<React.SetStateAction<number>>;
-    quizData: any[];
-    setQuizData: React.Dispatch<React.SetStateAction<any[]>>;
+    quizData: QuizData | null;
+    setQuizData: React.Dispatch<React.SetStateAction<QuizData | null>>;
 }
 
 let correctApplied = false;
 
 const PlayerBoard: React.FC<PlayerBoardProps> = ({ sharedState, setSharedState, quizData, setQuizData }) => {
-    if (quizData.length === 0) {
+    if (!quizData) {
         return <div>Loading...</div>;
     }
 
-    const quizTitle = quizData[0].title;
+    
+
+    console.log(quizData);
+
+    const quizTitle = quizData.quiz.title;
+    console.log(quizTitle);
 
     let selectedAns: string = "-1";
     const correctAns: string = "1";
