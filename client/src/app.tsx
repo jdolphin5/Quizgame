@@ -7,9 +7,9 @@ import ControlArea from './ControlArea';
 const App: React.FC = () => {
   const [quizData, setQuizData] = useState<any[]>([]);
   const [sharedState, setSharedState] = useState(0);
-  /*
+  
   useEffect(() => {
-    axios.get('/api/quiz') // Send a GET request to your server's /api/quiz route
+    axios.get('http://localhost:3000/api/quiz') // Send a GET request to your server's /api/quiz route
       .then((response: any) => {
         setQuizData(response.data); // Update the state with the fetched quiz data
       })
@@ -17,7 +17,7 @@ const App: React.FC = () => {
         console.error('Error fetching quiz data:', error);
       });
   }, []);
-  */
+  
   return (
     <div className = 'root'>
       <div className="playerBoard"><PlayerBoard sharedState={sharedState} quizData={quizData} setSharedState={setSharedState} setQuizData={setQuizData}/></div>
