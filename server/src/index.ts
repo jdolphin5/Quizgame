@@ -29,6 +29,7 @@ app.use(express.static(distPath));
 
 app.get('/api/quiz', async (req: any, res: any) => {
   try {
+    console.log('trying get request');
     const client = await pool.connect();
     const query = 'SELECT * FROM quiz;';
     const result = await client.query(query);
