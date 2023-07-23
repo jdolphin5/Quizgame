@@ -23,9 +23,5 @@ module.exports = {
 
     ],
   },
-  devServer: {
-    port: 3000,
-    // ... other devServer configurations ...
-  },
   
 };
