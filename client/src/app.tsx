@@ -11,8 +11,21 @@ interface QuizData {
     category: string;
     // Add any other properties of the quiz object here
   };
-  questions: Array<any>;
-  answers: Array<any>;
+  questions: Array<Question>;
+  answers: Array<Answer>;
+}
+
+interface Question {
+  question_id: number,
+  quiz_id: number,
+  question_text: string,
+}
+
+interface Answer {
+  answer_id: number,
+  question_id: number,
+  answer_text: string,
+  is_correct: boolean,
 }
 
 const App: React.FC = () => {
