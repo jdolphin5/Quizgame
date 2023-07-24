@@ -3,10 +3,9 @@ export interface QuizData {
       quiz_id: number;
       title: string;
       category: string;
-      // Add any other properties of the quiz object here
     };
-    questions: Array<Question>; // Replace 'any' with the correct type for a question
-    answers: Array<Answer>; // Replace 'any' with the correct type for an answer
+    questions: Array<Question>;
+    answers: Array<Answer>; 
 }
 
 export interface Question {

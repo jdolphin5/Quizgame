@@ -20,7 +20,7 @@ const QuestionTimer: React.FC<QuestionTimerProps> = ({ timeLimit, onTimeUp }) =>
 
   useEffect(() => {
     if (secondsRemaining === 0) {
-      clearInterval(intervalId!); // Add ! to indicate that intervalId cannot be null here
+      clearInterval(intervalId!); // ! to indicate that intervalId cannot be null here
       onTimeUp();
     }
   }, [secondsRemaining, intervalId, onTimeUp]);

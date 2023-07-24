@@ -1,10 +1,8 @@
-const path = require('path'); // Add the 'path' module
+const path = require('path');
 const express = require("express");
 const app = express();
 const { Pool } = require('pg');
 const cors = require('cors');
-
-//app.set('quiet', false);
 
 console.log('test');
 
@@ -15,7 +13,6 @@ const pool = new Pool({
   password: 'super',
   port: 5432, // Default
 });
-
 
 // Enable CORS
 app.use(cors());
@@ -68,7 +65,7 @@ app.get('/api/quiz/:id/questions/:numQuestions', async (req: any, res: any) => {
 
 const port = process.env.PORT || 3000;
 
-// Start the server
+// Start the node server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

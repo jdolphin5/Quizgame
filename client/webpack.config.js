@@ -1,18 +1,18 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.tsx', // The entry point of your application
+  entry: './src/index.tsx', // entry point of React app
   output: {
-    path: path.resolve(__dirname, 'dist'), // The output directory for bundled files
-    filename: 'bundle.js', // The name of the bundled file
+    path: path.resolve(__dirname, 'dist'), // output dir
+    filename: 'bundle.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'], // Add the .ts and .tsx extensions
+    extensions: ['.js', '.jsx', '.ts', '.tsx'], 
   },
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/, // Process TypeScript and TypeScript React files
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
         use: 'ts-loader',
       },

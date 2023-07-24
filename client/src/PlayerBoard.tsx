@@ -58,8 +58,6 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({ sharedState, setSharedState, 
 
     }
 
-
-
     return (
         <div>
             <div className="header2">

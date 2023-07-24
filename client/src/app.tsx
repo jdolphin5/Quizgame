@@ -12,7 +12,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const quizId = 1;
     const numQuestions = 5;
-    axios.get(`http://localhost:3000/api/quiz/${quizId}/questions/${numQuestions}`) // Send a GET request to your server's /api/quiz route
+    axios.get(`http://localhost:3000/api/quiz/${quizId}/questions/${numQuestions}`) // /api/quiz/${quizId}/questions/${numQuestions} route
       .then((response: any) => {
         setQuizData(response.data); // Update the state with the fetched quiz data
       })
