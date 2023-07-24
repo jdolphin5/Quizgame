@@ -28,3 +28,8 @@ export interface PlayerBoardProps {
     quizData: QuizData | null;
     setQuizData: React.Dispatch<React.SetStateAction<QuizData | null>>;
 }
+
+export interface QuestionTimerProps {
+    timeLimit: number;
+    onTimeUp: () => void;
+}

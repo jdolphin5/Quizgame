@@ -80,6 +80,6 @@ ul {
 .timer p {
     color : #ff0000;
     margin : 0px;
-    display : inline;
+    display: inline-block;
     font-size : 40px;
 }
