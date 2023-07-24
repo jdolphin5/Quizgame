@@ -1,37 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Radio, FormLabel, RadioGroup, FormControl, FormControlLabel
 } from '@mui/material';
-
-interface QuizData {
-    quiz: {
-      quiz_id: number;
-      title: string;
-      category: string;
-      // Add any other properties of the quiz object here
-    };
-    questions: Array<Question>; // Replace 'any' with the correct type for a question
-    answers: Array<Answer>; // Replace 'any' with the correct type for an answer
-}
-
-interface Question {
-    question_id: number,
-    quiz_id: number,
-    question_text: string,
-}
-
-interface Answer {
-    answer_id: number,
-    question_id: number,
-    answer_text: string,
-    is_correct: boolean,
-}
-
-interface PlayerBoardProps {
-    sharedState: number;
-    setSharedState: React.Dispatch<React.SetStateAction<number>>;
-    quizData: QuizData | null;
-    setQuizData: React.Dispatch<React.SetStateAction<QuizData | null>>;
-}
+import { QuizData, PlayerBoardProps, Answer, Question } from './types';
 
 let correctApplied = false;
 let shuffleAnswersNum = 0;

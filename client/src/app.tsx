@@ -3,30 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import PlayerBoard from './PlayerBoard';
 import ControlArea from './ControlArea';
-
-interface QuizData {
-  quiz: {
-    quiz_id: number;
-    title: string;
-    category: string;
-    // Add any other properties of the quiz object here
-  };
-  questions: Array<Question>;
-  answers: Array<Answer>;
-}
-
-interface Question {
-  question_id: number,
-  quiz_id: number,
-  question_text: string,
-}
-
-interface Answer {
-  answer_id: number,
-  question_id: number,
-  answer_text: string,
-  is_correct: boolean,
-}
+import { QuizData } from './types';
 
 const App: React.FC = () => {
   const [quizData, setQuizData] = useState<QuizData | null>(null);
