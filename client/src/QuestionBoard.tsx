@@ -11,18 +11,17 @@ const numQuestions = 5;
 const QuestionBoard: React.FC<ScoreboardProps> = ({ userState, setUserState }) => {
     const [quizData, setQuizData] = useState<QuizData | null>(null);
     const [quizDataFetched, setQuizDataFetched] = useState(false);
-    const [questionNumber, setQuestionNumber] = useState<number>(0);
-    const [shuffledAnswers, setShuffledAnswers] = useState<Answer[]>([]);
-    const [answers, setAnswers] = useState<Answer[]>([]);
-    const [question, setQuestion] = useState<Question | null>(null);
-    const [correctAnsId, setCorrectAnsId] = useState<number>(0);
     const [quizTitle, setQuizTitle] = useState<string>("");
-    const [timerLapsed, setTimerLapsed] = useState<boolean>(false);
-    const [shouldReset, setShouldReset] = useState<boolean>(true);
+    const [questionNumber, setQuestionNumber] = useState<number>(0);
+    const [question, setQuestion] = useState<Question | null>(null);
+    const [answers, setAnswers] = useState<Answer[]>([]);
+    const [shuffledAnswers, setShuffledAnswers] = useState<Answer[]>([]);
+    const [correctAnsId, setCorrectAnsId] = useState<number>(0);
     const [hasAnsweredQuestion, setHasAnsweredQuestion] = useState<boolean>(false);
     const [selectedAnswer, setSelectedAnswer] = useState<number>(-1);
+    const [timerLapsed, setTimerLapsed] = useState<boolean>(false);
+    const [shouldReset, setShouldReset] = useState<boolean>(true);
 
-    
     useEffect(() => {
         axios.get(`http://localhost:3000/api/quiz/${quizId}/questions/${numQuestions}`) // /api/quiz/${quizId}/questions/${numQuestions} route
           .then((response: any) => {
@@ -41,7 +40,6 @@ const QuestionBoard: React.FC<ScoreboardProps> = ({ userState, setUserState }) =
         }
         setTimerLapsed(false);
     }, [answers, quizDataFetched]);
-    
 
     useEffect(() => {
         if (quizData && questionNumber >= 0 && questionNumber < quizData.questions.length) {
@@ -65,6 +63,7 @@ const QuestionBoard: React.FC<ScoreboardProps> = ({ userState, setUserState }) =
         setQuizTitle(quizData.quiz.title);
         setShuffledAnswers([]);
         }
+
       }, [questionNumber, quizData]);
 
     useEffect(() => {
@@ -81,6 +80,7 @@ const QuestionBoard: React.FC<ScoreboardProps> = ({ userState, setUserState }) =
                 }
             }
         }
+
     }, [timerLapsed])
 
     if (!quizData) {
@@ -88,7 +88,6 @@ const QuestionBoard: React.FC<ScoreboardProps> = ({ userState, setUserState }) =
     }
 
     console.log(quizData);
-
     
     const shuffleAnswers = (array: Answer[]) => { 
         for (let i = array.length - 1; i > 0; i--) { 
