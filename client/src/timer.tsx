@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { QuestionTimerProps } from './types';
 
-const QuestionTimer: React.FC<QuestionTimerProps> = ({ timeLimit, onTimeUp }) => {
+const QuestionTimer: React.FC<QuestionTimerProps> = ({ timeLimit, onTimeUp, shouldReset }) => {
   const [secondsRemaining, setSecondsRemaining] = useState<number>(timeLimit);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
@@ -19,13 +19,17 @@ const QuestionTimer: React.FC<QuestionTimerProps> = ({ timeLimit, onTimeUp }) =>
   }, []);
 
   useEffect(() => {
-    if (secondsRemaining === 0) {
+    if (secondsRemaining === 0 && !shouldReset) {
       clearInterval(intervalId!); // ! to indicate that intervalId cannot be null here
       onTimeUp();
     }
+    else if (secondsRemaining === 0 && shouldReset) {
+      onTimeUp();
+      setSecondsRemaining(timeLimit);
+    }
   }, [secondsRemaining, intervalId, onTimeUp]);
 
-  return <div>{secondsRemaining}</div>;
+  return secondsRemaining;
 };
 
 export default QuestionTimer;
