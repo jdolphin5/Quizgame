@@ -8,7 +8,7 @@ import axios from 'axios';
 const quizId = 1;
 const numQuestions = 5;
 
-const QuestionBoard: React.FC<ScoreboardProps> = ({ userState, setUserState }) => {
+const Questionboard: React.FC<ScoreboardProps> = ({ userState, setUserState }) => {
     const [quizData, setQuizData] = useState<QuizData | null>(null);
     const [quizDataFetched, setQuizDataFetched] = useState(false);
     const [quizTitle, setQuizTitle] = useState<string>("");
@@ -137,4 +137,4 @@ const QuestionBoard: React.FC<ScoreboardProps> = ({ userState, setUserState }) =
       );
     };
 
-export default QuestionBoard;
+export default Questionboard;

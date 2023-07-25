@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import QuestionBoard from './QuestionBoard';
+import Questionboard from './Questionboard';
 import Scoreboard from './Scoreboard';
 
 const App: React.FC = () => {
@@ -8,8 +8,8 @@ const App: React.FC = () => {
   
   return (
     <div className = 'root'>
-      <div className="playerBoard"><QuestionBoard userState={userState} setUserState={setUserState}/></div>
-      <div className="controlArea"><Scoreboard userState={userState} setUserState={setUserState}/></div>
+      <div className="questionBoard"><Questionboard userState={userState} setUserState={setUserState}/></div>
+      <div className="scoreBoard"><Scoreboard userState={userState} setUserState={setUserState}/></div>
     </div>
   );
 };
