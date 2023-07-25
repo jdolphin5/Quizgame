@@ -9,6 +9,9 @@ const quizId = 1;
 const numQuestions = 5;
 
 const Questionboard: React.FC<ScoreboardProps> = ({ userState, setUserState }) => {
+
+    //useState hook needed for any value that either effects the rendering of the React component
+    //or that does not remain constant over the lifecycle of the component
     const [quizData, setQuizData] = useState<QuizData | null>(null);
     const [quizDataFetched, setQuizDataFetched] = useState(false);
     const [quizTitle, setQuizTitle] = useState<string>("");
