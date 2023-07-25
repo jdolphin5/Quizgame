@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, TableBody, TableContainer, TableCell, TableHead, TableRow
 } from '@mui/material';
 
-interface PlayerBoardProps {
+interface ScoreboardProps {
     userState: number;
     setUserState: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -19,7 +19,7 @@ const data = [
     createData("Patrick", 1),
 ];
 
-const ControlArea: React.FC<PlayerBoardProps> = ({ userState, setUserState }) => {
+const Scoreboard: React.FC<ScoreboardProps> = ({ userState, setUserState }) => {
     return (
         <div>
             <h1 className="header1" style={{color : "#ffffff"}}>Scoreboard</h1>
@@ -51,4 +51,4 @@ const ControlArea: React.FC<PlayerBoardProps> = ({ userState, setUserState }) =>
     );
 };
 
-export default ControlArea;
+export default Scoreboard;

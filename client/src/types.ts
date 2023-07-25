@@ -21,7 +21,7 @@ export interface Answer {
     is_correct: boolean,
 }
 
-export interface PlayerBoardProps {
+export interface ScoreboardProps {
     userState: number;
     setUserState: React.Dispatch<React.SetStateAction<number>>;
 }

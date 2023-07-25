@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Radio, FormLabel, RadioGroup, FormControl, FormControlLabel
 } from '@mui/material';
-import { QuizData, PlayerBoardProps, Answer, Question } from './types';
+import { QuizData, ScoreboardProps, Answer, Question } from './types';
 import QuestionTimer from './timer';
 import axios from 'axios';
 
-let correctApplied = false;
 const quizId = 1;
 const numQuestions = 5;
 
-const PlayerBoard: React.FC<PlayerBoardProps> = ({ userState, setUserState }) => {
+const QuestionBoard: React.FC<ScoreboardProps> = ({ userState, setUserState }) => {
     const [quizData, setQuizData] = useState<QuizData | null>(null);
     const [quizDataFetched, setQuizDataFetched] = useState(false);
     const [questionNumber, setQuestionNumber] = useState<number>(0);
@@ -101,8 +100,6 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({ userState, setUserState }) =>
 
     console.log(correctAnsId);
 
-    let selectedAns: number = -1;
-
     const handleChange = (event: any) => {
       setSelectedAnswer(+event.target.value); //convert value of the selectedAnswer from string to number
     }
@@ -141,4 +138,4 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({ userState, setUserState }) =>
       );
     };
 
-export default PlayerBoard;
+export default QuestionBoard;
