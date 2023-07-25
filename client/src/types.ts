@@ -22,13 +22,12 @@ export interface Answer {
 }
 
 export interface PlayerBoardProps {
-    sharedState: number;
-    setSharedState: React.Dispatch<React.SetStateAction<number>>;
-    quizData: QuizData | null;
-    setQuizData: React.Dispatch<React.SetStateAction<QuizData | null>>;
+    userState: number;
+    setUserState: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface QuestionTimerProps {
     timeLimit: number;
     onTimeUp: () => void;
+    shouldReset: boolean;
 }
