@@ -3,8 +3,8 @@ import { Table, TableBody, TableContainer, TableCell, TableHead, TableRow
 } from '@mui/material';
 
 interface PlayerBoardProps {
-    sharedState: number;
-    setSharedState: React.Dispatch<React.SetStateAction<number>>;
+    userState: number;
+    setUserState: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function createData(
@@ -19,7 +19,7 @@ const data = [
     createData("Patrick", 1),
 ];
 
-const ControlArea: React.FC<PlayerBoardProps> = ({ sharedState, setSharedState }) => {
+const ControlArea: React.FC<PlayerBoardProps> = ({ userState, setUserState }) => {
     return (
         <div>
             <h1 className="header1" style={{color : "#ffffff"}}>Scoreboard</h1>
@@ -42,7 +42,7 @@ const ControlArea: React.FC<PlayerBoardProps> = ({ sharedState, setSharedState }
                     }
                     <TableRow sx={{border: 1, color:'gray'}}>
                     <TableCell sx={{color:"#ffffff"}} align="left">HookUser</TableCell>
-                    <TableCell sx={{color:"#ffffff"}} align="left">{sharedState}</TableCell>
+                    <TableCell sx={{color:"#ffffff"}} align="left">{userState}</TableCell>
                     </TableRow>
                 </TableBody>
                 </Table>
