@@ -21,9 +21,16 @@ export interface Answer {
     is_correct: boolean,
 }
 
+export interface User {
+    user_id: number,
+    username: string,
+    question_and_answer: { [question: number]: number | null }, //key-value question_id : answer_id
+    score: number
+}
+
 export interface ScoreboardProps {
-    userState: number;
-    setUserState: React.Dispatch<React.SetStateAction<number>>;
+    userState: Array<User>;
+    setUserState: React.Dispatch<React.SetStateAction<Array<User>>>;
 }
 
 export interface QuestionTimerProps {

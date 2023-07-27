@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Radio, FormLabel, RadioGroup, FormControl, FormControlLabel
 } from '@mui/material';
-import { QuizData, ScoreboardProps, Answer, Question } from './types';
+import { QuizData, ScoreboardProps, Answer, Question, User } from './types';
 import QuestionTimer from './timer';
 import axios from 'axios';
 
@@ -78,10 +78,43 @@ const Questionboard: React.FC<ScoreboardProps> = ({ userState, setUserState }) =
                 setHasAnsweredQuestion(true);
                 console.log(selectedAnswer);
                 console.log(correctAnsId);
-                if (selectedAnswer === correctAnsId) {
-                    setUserState(userState + 1);
+
+                const myUser = userState[0];
+
+                let myScore = myUser.score;
+
+                let selectedAnswerId = -1;
+
+                answers.forEach((answer) => {
+                    if (answer.answer_id === selectedAnswer) {
+                    selectedAnswerId = answer.answer_id;
+                    }
+                });
+
+                if (selectedAnswerId === correctAnsId) {
+                    //setUserState(userState + 1);
+                    myScore++;
                 }
+
+                if (myUser && question) {
+                    const updatedUser = {
+                        ...myUser,
+                        question_and_answer: {
+                            ...myUser.question_and_answer,
+                            [question.question_id]: selectedAnswerId,
+                        },
+                        score: myScore,
+                    }
+                    const updatedUsers = userState.map((user) =>
+                        user.user_id === myUser.user_id ? updatedUser : user
+                    );
+                    setUserState(updatedUsers);
+                    console.log(updatedUser);
+                };
             }
+
+
+            setSelectedAnswer(-1);
         }
 
     }, [timerLapsed])

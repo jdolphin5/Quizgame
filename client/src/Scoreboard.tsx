@@ -1,12 +1,10 @@
 import React from 'react';
 import { Table, TableBody, TableContainer, TableCell, TableHead, TableRow
 } from '@mui/material';
+import { ScoreboardProps } from './types';
 
-interface ScoreboardProps {
-    userState: number;
-    setUserState: React.Dispatch<React.SetStateAction<number>>;
-}
 
+/*
 function createData(
 username: string,
 score: number,) 
@@ -18,6 +16,7 @@ const data = [
     createData("Spongebob", 0),
     createData("Patrick", 1),
 ];
+*/
 
 const Scoreboard: React.FC<ScoreboardProps> = ({ userState, setUserState }) => {
     return (
@@ -33,17 +32,19 @@ const Scoreboard: React.FC<ScoreboardProps> = ({ userState, setUserState }) => {
                 </TableHead>
                 <TableBody>
                     {
-                    data.map((row) => (
-                        <TableRow key={row.username} sx={{border: 1, color:'gray'}}>
-                        <TableCell sx={{color:"#ffffff"}} align="left">{row.username}</TableCell>
-                        <TableCell sx={{color:"#ffffff"}} align="left">{row.score}</TableCell>
+                    userState.map((user) => (
+                        <TableRow key={user.username} sx={{border: 1, color:'gray'}}>
+                        <TableCell sx={{color:"#ffffff"}} align="left">{user.username}</TableCell>
+                        <TableCell sx={{color:"#ffffff"}} align="left">{user.score}</TableCell>
                         </TableRow>
                     ))
                     }
+                    {/*
                     <TableRow sx={{border: 1, color:'gray'}}>
                     <TableCell sx={{color:"#ffffff"}} align="left">HookUser</TableCell>
                     <TableCell sx={{color:"#ffffff"}} align="left">{userState}</TableCell>
                     </TableRow>
+                    */}
                 </TableBody>
                 </Table>
             </TableContainer>
