@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Questionboard from './Questionboard';
+import QuizSelect from './QuizSelect'
+import Questionboard from './QuestionBoard';
 import Scoreboard from './Scoreboard';
-import { User } from './types';
+import { User, QuizData } from './types';
 
 const App: React.FC = () => {
   const [userState, setUserState] = useState<User[]>([]);
+  const [quizData, setQuizData] = useState<QuizData | null>(null);
+  const [quizDataFetched, setQuizDataFetched] = useState(false);
 
   useEffect(() => {
     const myUser: User = {
@@ -19,8 +22,15 @@ const App: React.FC = () => {
 
   return (
     <div className = 'root'>
-      <div className="questionBoard"><Questionboard userState={userState} setUserState={setUserState}/></div>
-      <div className="scoreBoard"><Scoreboard userState={userState} setUserState={setUserState}/></div>
+      {
+        !quizDataFetched ? (
+          <div className = "quizSelect"><QuizSelect quizDataFetched={quizDataFetched} setQuizDataFetched={setQuizDataFetched} quizData={quizData} setQuizData={setQuizData} userState={userState} setUserState={setUserState} /></div>
+        )
+        : (
+          <div className="questionBoard"><Questionboard quizData={quizData} setQuizData={setQuizData} userState={userState} setUserState={setUserState} /></div>
+        )
+      }
+      <div className="scoreBoard"><Scoreboard userState={userState} setUserState={setUserState} /></div>
     </div>
   );
 };

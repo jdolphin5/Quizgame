@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Radio, FormLabel, RadioGroup, FormControl, FormControlLabel
 } from '@mui/material';
-import { QuizData, ScoreboardProps, Answer, Question, User } from './types';
+import { QuizData, QuestionboardProps, Answer, Question, User } from './types';
 import QuestionTimer from './timer';
 import axios from 'axios';
 
 const quizId = 1;
 const numQuestions = 5;
 
-const Questionboard: React.FC<ScoreboardProps> = ({ userState, setUserState }) => {
+const Questionboard: React.FC<QuestionboardProps> = ({ quizData, setQuizData, userState, setUserState }) => {
 
     //useState hook needed for any value that either effects the rendering of the React component
     //or that does not remain constant over the lifecycle of the component
-    const [quizData, setQuizData] = useState<QuizData | null>(null);
-    const [quizDataFetched, setQuizDataFetched] = useState(false);
+    //const [quizData, setQuizData] = useState<QuizData | null>(null);
+    const [quizDataFetched, setQuizDataFetched] = useState(true); //need to toggle when loading page
     const [quizTitle, setQuizTitle] = useState<string>("");
     const [questionNumber, setQuestionNumber] = useState<number>(0);
     const [question, setQuestion] = useState<Question | null>(null);
@@ -24,18 +24,6 @@ const Questionboard: React.FC<ScoreboardProps> = ({ userState, setUserState }) =
     const [selectedAnswer, setSelectedAnswer] = useState<number>(-1);
     const [timerLapsed, setTimerLapsed] = useState<boolean>(false);
     const [shouldReset, setShouldReset] = useState<boolean>(true);
-
-    useEffect(() => {
-        axios.get(`http://localhost:3000/api/quiz/${quizId}/questions/${numQuestions}`) // /api/quiz/${quizId}/questions/${numQuestions} route
-          .then((response: any) => {
-            setQuizData(response.data); // Update the state with the fetched quiz data
-            setQuizDataFetched(true);
-        })
-          .catch((error: any) => {
-            console.error('Error fetching quiz data:', error);
-          });
-
-      }, []);
 
     useEffect(() => {
         if (quizDataFetched && quizData && shuffledAnswers.length === 0) {

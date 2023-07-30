@@ -24,6 +24,25 @@ app.use(express.static(distPath));
 // Remember that security is crucial when setting up a server-side API.
 // Make sure to validate user input and sanitize SQL queries to prevent SQL injection attacks.
 
+app.get('/api/quiz', async (req: any, res: any) => {
+  try {
+
+console.log("GET /api/quiz");
+    const client = await pool.connect();
+    const quizQuery = `SELECT * FROM quiz;`;
+    const quizResult = await client.query(quizQuery);
+    console.log("quiz query complete");
+    const quizRes = quizResult.rows;
+    
+    client.release();
+    res.json(quizRes);
+  } catch (err) {
+    console.log('Error fetching quiz data');
+    res.status(500).json({ error: 'Error fetching quiz data' });
+  }
+});
+
+
 app.get('/api/quiz/:id/questions/:numQuestions', async (req: any, res: any) => {
   try {
     const quizId = req.params.id;

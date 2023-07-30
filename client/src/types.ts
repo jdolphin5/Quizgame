@@ -1,3 +1,9 @@
+export interface Quiz {
+    quiz_id: number;
+    title: string;
+    category: string;
+}
+
 export interface QuizData {
     quiz: {
       quiz_id: number;
@@ -29,6 +35,22 @@ export interface User {
 }
 
 export interface ScoreboardProps {
+    userState: Array<User>;
+    setUserState: React.Dispatch<React.SetStateAction<Array<User>>>;
+}
+
+export interface QuizSelectProps {
+    quizDataFetched: boolean;
+    setQuizDataFetched: React.Dispatch<React.SetStateAction<boolean>>;
+    quizData: QuizData | null;
+    setQuizData: React.Dispatch<React.SetStateAction<QuizData | null>>;
+    userState: Array<User>;
+    setUserState: React.Dispatch<React.SetStateAction<Array<User>>>;
+}
+
+export interface QuestionboardProps {
+    quizData: QuizData | null;
+    setQuizData: React.Dispatch<React.SetStateAction<QuizData | null>>;
     userState: Array<User>;
     setUserState: React.Dispatch<React.SetStateAction<Array<User>>>;
 }
