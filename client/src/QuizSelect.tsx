@@ -3,7 +3,6 @@ import { Button, Select, FormControl, MenuItem, SelectChangeEvent } from '@mui/m
 import { QuizSelectProps, Quiz } from './types';
 import axios from 'axios';
 
-let quizId: number = 1;
 let numQuestions = 5;
 
 const QuizSelect: React.FC<QuizSelectProps> = ({ quizDataFetched, setQuizDataFetched, quizData, setQuizData, userState, setUserState }) => {
@@ -29,9 +28,9 @@ const QuizSelect: React.FC<QuizSelectProps> = ({ quizDataFetched, setQuizDataFet
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         console.log(selectedQuizId);
-        if (selectedQuizId !== undefined) {
+        if (selectedQuizId !== -1) {
             numQuestions = 5;
-            axios.get(`http://localhost:3000/api/quiz/${quizId}/questions/${numQuestions}`) // /api/quiz/${quizId}/questions/${numQuestions} route
+            axios.get(`http://localhost:3000/api/quiz/${selectedQuizId}/questions/${numQuestions}`) // /api/quiz/${quizId}/questions/${numQuestions} route
             .then((response: any) => {
                 console.log("quiz selected and selected quiz returned");
                 setQuizData(response.data); // Update the state with the fetched quiz data
@@ -78,7 +77,7 @@ const QuizSelect: React.FC<QuizSelectProps> = ({ quizDataFetched, setQuizDataFet
                         })}
                     </Select>
                     <Button variant="contained" color="primary" type="submit">
-                    Submit
+                    Start Quiz
                     </Button>
                     </FormControl>
                 </form>
