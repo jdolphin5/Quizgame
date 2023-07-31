@@ -8,6 +8,17 @@
     grid-template-columns : 750px 300px; /*column widths*/
 }
 
+.usernameSelect {
+    background-color : #d9d9d9;
+    font-family: Arial, Helvetica, sans-serif;
+    grid-column : 1 / 2;
+}
+
+.usernameForm {
+    margin: 0 auto;
+    text-align: center;
+}
+
 .quizSelect {
     background-color : #d9d9d9;
     font-family: Arial, Helvetica, sans-serif;

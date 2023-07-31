@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Radio, FormLabel, RadioGroup, FormControl, FormControlLabel
 } from '@mui/material';
-import { QuizData, QuestionboardProps, Answer, Question, User } from './types';
+import { QuestionboardProps, Answer, Question } from './types';
 import QuestionTimer from './timer';
-import axios from 'axios';
 
 const quizId = 1;
 const numQuestions = 5;
@@ -68,9 +67,7 @@ const Questionboard: React.FC<QuestionboardProps> = ({ quizData, setQuizData, us
                 console.log(correctAnsId);
 
                 const myUser = userState[0];
-
                 let myScore = myUser.score;
-
                 let selectedAnswerId = -1;
 
                 answers.forEach((answer) => {

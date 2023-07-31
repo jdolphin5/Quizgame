@@ -39,6 +39,13 @@ export interface ScoreboardProps {
     setUserState: React.Dispatch<React.SetStateAction<Array<User>>>;
 }
 
+export interface UsernameSelectProps {
+    usernameSelected: boolean;
+    setUsernameSelected: React.Dispatch<React.SetStateAction<boolean>>;
+    userState: Array<User>;
+    setUserState: React.Dispatch<React.SetStateAction<Array<User>>>;
+}
+
 export interface QuizSelectProps {
     quizDataFetched: boolean;
     setQuizDataFetched: React.Dispatch<React.SetStateAction<boolean>>;
