@@ -30,8 +30,19 @@ export interface Answer {
 export interface User {
     user_id: number,
     username: string,
-    question_and_answer: { [question: number]: number | null }, //key-value question_id : answer_id
+    question_and_answer: QandA[], //key-value question_id : answer_id
     score: number
+}
+
+export interface QandA {
+    question_id: number;
+    answer_id: number;
+}
+
+export interface Result {
+    question: Question;
+    answers: Answer[];
+    selected_answer_id: number;
 }
 
 export interface ScoreboardProps {
@@ -64,6 +75,13 @@ export interface QuestionboardProps {
     setQuizData: React.Dispatch<React.SetStateAction<QuizData | null>>;
     userState: Array<User>;
     setUserState: React.Dispatch<React.SetStateAction<Array<User>>>;
+}
+
+export interface ResultPageProps {
+    userResults: Result[];
+    userState: User[];
+    showModal: boolean;
+    setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface QuestionTimerProps {
