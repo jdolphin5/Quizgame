@@ -47,6 +47,8 @@ export interface UsernameSelectProps {
 }
 
 export interface QuizSelectProps {
+    timerValue: number;
+    setTimerValue: React.Dispatch<React.SetStateAction<number>>;
     quizDataFetched: boolean;
     setQuizDataFetched: React.Dispatch<React.SetStateAction<boolean>>;
     quizData: QuizData | null;
@@ -56,6 +58,8 @@ export interface QuizSelectProps {
 }
 
 export interface QuestionboardProps {
+    timerValue: number;
+    setTimerValue: React.Dispatch<React.SetStateAction<number>>;
     quizData: QuizData | null;
     setQuizData: React.Dispatch<React.SetStateAction<QuizData | null>>;
     userState: Array<User>;
