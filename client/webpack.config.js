@@ -29,5 +29,5 @@ module.exports = {
       template: './new/path/to/index.html', // Specify the new location of your HTML template
     }),
   */
-  
+  cache: false,
 };
