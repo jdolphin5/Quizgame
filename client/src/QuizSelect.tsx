@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Select, FormControl, MenuItem, SelectChangeEvent } from '@mui/material';
+import { Button, FormControl, MenuItem, Select, SelectChangeEvent, Slider, Typography } from '@mui/material';
 import { QuizSelectProps, Quiz } from './types';
 import axios from 'axios';
 
 let numQuestions = 5;
 
-const QuizSelect: React.FC<QuizSelectProps> = ({ quizDataFetched, setQuizDataFetched, quizData, setQuizData, userState, setUserState }) => {
+const QuizSelect: React.FC<QuizSelectProps> = ({ timerValue, setTimerValue, quizDataFetched, setQuizDataFetched, quizData, setQuizData, userState, setUserState }) => {
 
     //useState hook needed for any value that either effects the rendering of the React component
     //or that does not remain constant over the lifecycle of the component
@@ -50,6 +50,11 @@ const QuizSelect: React.FC<QuizSelectProps> = ({ quizDataFetched, setQuizDataFet
         }
     };
 
+    const handleSliderChange = (event: Event, newValue: number | number[]) => {
+        setTimerValue(newValue as number);
+        // Other handling logic based on the new value can be added here
+      };
+
     return (
         <div>
             <div className="header2">
@@ -60,29 +65,41 @@ const QuizSelect: React.FC<QuizSelectProps> = ({ quizDataFetched, setQuizDataFet
                 <div className="timer"></div>
             </div>
             <div className="body2">
-                
-                <div>
-                <h2>Select Quiz</h2>
                 <form autoComplete="off" onSubmit={handleSubmit}>
-                <FormControl>
-                    <Select
-                        labelId="simple-select-label"
-                        value={selectedQuizId}
-                        onChange={handleChange}
-                        displayEmpty // Add this if you want to display an empty option
-                    >
-                        {/* Looping through the array */}
-                        {quizDataOptions?.map((quizOption) => {
-                        return <MenuItem key={quizOption.quiz_id} value={quizOption.quiz_id}>{quizOption.title}</MenuItem>;
-                        })}
-                    </Select>
-                    <Button variant="contained" color="primary" type="submit">
-                    Start Quiz
-                    </Button>
-                    </FormControl>
-                </form>
-                    <h4>Please select a Quiz above</h4>
-                </div>
+                    <div className="quizSelectContainer">
+                        <div className="quizSelect-row-1-col-1">
+                            <Typography id="quiz-dropdown" gutterBottom>
+                                Select a quiz topic
+                            </Typography>
+                        </div>
+                        <div className="quizSelect-row-1-col-2">
+                            <FormControl>
+                                <Select
+                                    labelId="simple-select-label"
+                                    value={selectedQuizId}
+                                    onChange={handleChange}
+                                >
+                                    {quizDataOptions?.map((quizOption) => {
+                                    return <MenuItem key={quizOption.quiz_id} value={quizOption.quiz_id}>{quizOption.title}</MenuItem>;
+                                    })}
+                                </Select>
+                            </FormControl>
+                        </div>
+                        <div className="quizSelect-row-2-col-1">
+                            <Typography id="slider" gutterBottom>
+                            Timer (seconds): {timerValue}
+                            </Typography>
+                        </div>
+                        <div className="quizSelect-row-2-col-2">
+                            <Slider aria-label="Slider" onChange={handleSliderChange} valueLabelDisplay="off" defaultValue={10} step={5} marks min={5} max={30} />
+                        </div>
+                        <div className="quizSelect-row-3-col-1">
+                            <Button variant="contained" color="primary" type="submit">
+                            Start Quiz
+                            </Button>
+                        </div>
+                    </div>
+                </form>     
             </div>
         </div>
       );
