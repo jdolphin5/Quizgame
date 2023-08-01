@@ -7,7 +7,7 @@ import QuestionTimer from './timer';
 const quizId = 1;
 const numQuestions = 5;
 
-const Questionboard: React.FC<QuestionboardProps> = ({ quizData, setQuizData, userState, setUserState }) => {
+const Questionboard: React.FC<QuestionboardProps> = ({ timerValue, setTimerValue, quizData, setQuizData, userState, setUserState }) => {
 
     //useState hook needed for any value that either effects the rendering of the React component
     //or that does not remain constant over the lifecycle of the component
@@ -33,30 +33,30 @@ const Questionboard: React.FC<QuestionboardProps> = ({ quizData, setQuizData, us
 
     useEffect(() => {
         if (quizData && questionNumber >= 0 && questionNumber < quizData.questions.length) {
-          let currentQuestion = quizData.questions[questionNumber];
-          let answers = quizData.answers.filter(ans => ans.question_id === currentQuestion.question_id);
-          let correctAnsId: number = 0;
-          answers.forEach((answer) => {
-            if (answer.is_correct) {
-              correctAnsId = answer.answer_id;
-            }
-          });
+            let currentQuestion = quizData.questions[questionNumber];
+            let answers = quizData.answers.filter(ans => ans.question_id === currentQuestion.question_id);
+            let correctAnsId: number = 0;
+            answers.forEach((answer) => {
+                if (answer.is_correct) {
+                correctAnsId = answer.answer_id;
+                }
+            });
 
-        if (questionNumber >= numQuestions-1) {
-            setShouldReset(false);
-        }
-          
-        setHasAnsweredQuestion(false);
-        setQuestion(currentQuestion);
-        setAnswers(answers);
-        setCorrectAnsId(correctAnsId);
-        setQuizTitle(quizData.quiz.title);
-        setShuffledAnswers([]);
+            if (questionNumber >= numQuestions-1) {
+                setShouldReset(false);
+            }
+            
+            setHasAnsweredQuestion(false);
+            setQuestion(currentQuestion);
+            setAnswers(answers);
+            setCorrectAnsId(correctAnsId);
+            setQuizTitle(quizData.quiz.title);
+            setShuffledAnswers([]);
         }
 
       }, [questionNumber, quizData]);
 
-    useEffect(() => {
+    useEffect(() => { 
         if (timerLapsed) {
             if (questionNumber < numQuestions-1) { //increment from 0 to numQuestions-1
                 setQuestionNumber(questionNumber+1);
@@ -135,7 +135,7 @@ const Questionboard: React.FC<QuestionboardProps> = ({ quizData, setQuizData, us
                     Quiz Game
                 </div>
                 <div className="quizName">{quizTitle}</div>
-                <div className="timer">Timer: <p>{<QuestionTimer shouldReset={shouldReset} timeLimit={10} onTimeUp={handleTimeUp} />}</p></div>
+                <div className="timer">Timer: <p>{<QuestionTimer shouldReset={shouldReset} timeLimit={timerValue} onTimeUp={handleTimeUp} />}</p></div>
             </div>
             <div className="body2">
                 <h2>Question {questionNumber+1}</h2>
