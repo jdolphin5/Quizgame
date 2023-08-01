@@ -15,7 +15,7 @@ const UsernameSelect: React.FC<UsernameSelectProps> = ({ usernameSelected, setUs
         const myUser: User = {
             user_id: 1,
             username: myUsername,
-            question_and_answer: {},
+            question_and_answer: [],
             score: 0,
           };
       
