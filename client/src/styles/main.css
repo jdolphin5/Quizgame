@@ -168,9 +168,11 @@ ul {
 .table-correct {
     background-color: #00ff00;
 }
+
 .table-incorrect {
 
 }
+
 .table-selected {
     background-color: #ff0000;
 }
@@ -178,20 +180,20 @@ ul {
 .legend-container {
     top: 20px;
     right: 20px;
-  }
+}
   
-  .legend-box {
+.legend-box {
     width: 20px;
     height: 20px;
     display: inline-block;
     margin-right: 10px;
     border: 1px solid #000;
-  }
+}
   
-  .correct-box {
+.correct-box {
     background-color: #00ff00; /* Green or your choice */
-  }
+}
   
-  .selected-box {
+.selected-box {
     background-color: #ff0000; /* Light Blue or your choice */
-  }
+}
