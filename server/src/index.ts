@@ -14,6 +14,16 @@ const pool = new Pool({
   port: 5432, // Default
 });
 
+function generateUsername() {
+  const adjective = ['happy', 'sunny', 'clever', 'witty'];
+  const noun = ['penguin', 'sunflower', 'fox', 'book'];
+  
+  const randomAdjective = adjective[Math.floor(Math.random() * adjective.length)];
+  const randomNoun = noun[Math.floor(Math.random() * noun.length)];
+
+  return randomAdjective + '_' + randomNoun;
+}
+
 // Enable CORS
 app.use(cors());
 
@@ -23,6 +33,11 @@ app.use(express.static(distPath));
 
 // Remember that security is crucial when setting up a server-side API.
 // Make sure to validate user input and sanitize SQL queries to prevent SQL injection attacks.
+
+app.get('/api/generate-username', (req: any, res: any) => {
+  const generatedUsername = generateUsername();
+  res.json({generatedUsername});
+});
 
 app.get('/api/quiz', async (req: any, res: any) => {
   try {
