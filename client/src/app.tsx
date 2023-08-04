@@ -52,7 +52,9 @@ const App: React.FC = () => {
         </div>
       )
     }
+    {usernameSelected && (
       <div className="scoreBoard"><Scoreboard userState={userState} setUserState={setUserState} /></div>
+    )}
     </div>
   );
 };

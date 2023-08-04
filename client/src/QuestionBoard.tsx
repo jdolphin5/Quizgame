@@ -185,15 +185,13 @@ const Questionboard: React.FC<QuestionboardProps> = ({ timerValue, setTimerValue
                     }
                     </RadioGroup>
                 </FormControl>
-                
-                <h4>Please select an answer above</h4>
                 <div className="showHideQuizComplete">
                     { quizComplete ? 
                         <Button variant="contained" color="primary" onClick={handleShowModal}>
                             Show Results
                         </Button>
                         : 
-                        null 
+                        <h4>Please select an answer above</h4>
                     }
                 </div>
             </div>
