@@ -25,20 +25,19 @@ const UsernameSelect: React.FC<UsernameSelectProps> = ({ usernameSelected, setUs
 
     return (
         <div>
-            <div className="header2">
-                <div className="gameName">
-                </div>
-                <div className="quizName"></div>
-            </div>
             <div className="body2">
                 <div className="usernameForm">
-                    <form autoComplete="off" onSubmit={handleSubmit}>
-                    <TextField id="standard-basic" label="Username" variant="standard" onChange={setUsername} />
-                    <br />
-                    <br />
-                    <Button variant="contained" type="submit">Submit</Button>
-                    <br />
-                    </form>
+                    <div className="usernameGrid">
+                        <div className="username-row-2">
+                            <form autoComplete="off" onSubmit={handleSubmit}>
+                            <TextField id="standard-basic" label="Enter Username" variant="standard" onChange={setUsername} />
+                            <br />
+                            <br />
+                            <Button variant="contained" type="submit">Submit</Button>
+                            <br />
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
