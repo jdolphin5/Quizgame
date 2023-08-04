@@ -1,7 +1,7 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Button, FormControl, MenuItem, Select, SelectChangeEvent, Slider, Typography } from '@mui/material';
 import { QuizSelectProps, Quiz } from './types';
-import axios from 'axios';
 
 let numQuestions = 5;
 
