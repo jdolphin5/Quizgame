@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { UsernameSelectProps, User } from './types';
 import { Button, TextField } from '@mui/material';
+import useWebSocket from 'react-use-websocket';
 
 const UsernameSelect: React.FC<UsernameSelectProps> = ({ usernameSelected, setUsernameSelected, userState, setUserState }) => {
 
@@ -64,6 +65,13 @@ const UsernameSelect: React.FC<UsernameSelectProps> = ({ usernameSelected, setUs
         }
     }
 
+    const WS_URL = `ws://localhost:3000/`;
+    useWebSocket(WS_URL, {
+        onOpen: () => {
+            console.log('Websocket connection established.');
+        }
+    });
+
     return (
         <div>
             <div className="body2">
@@ -82,6 +90,7 @@ const UsernameSelect: React.FC<UsernameSelectProps> = ({ usernameSelected, setUs
                         </div>
                     </div>
                 </div>
+                <div id="rss"></div>
             </div>
         </div>
       );

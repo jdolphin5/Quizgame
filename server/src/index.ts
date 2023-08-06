@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const { Pool } = require('pg');
 const cors = require('cors');
+const { createServer } = require('http');
+const { WebSocketServer } = require('ws');
 
 console.log('test');
 
@@ -31,9 +33,30 @@ app.use(cors());
 const distPath = path.resolve(__dirname, '../client/dist');
 app.use(express.static(distPath));
 
+const server = createServer(app);
+const wss = new WebSocketServer({server});
+
+wss.on('connection', (ws: any) => {
+  const id = setInterval(() => {
+    ws.send(JSON.stringify(process.memoryUsage()), () => {
+      //
+      // Ignore errors.
+      console.log('connection send');
+      //
+    });
+  }, 100);
+  console.log('started client interval');
+
+  ws.on('error', console.error);
+
+  ws.on('close', function () {
+    console.log('stopping client interval');
+    clearInterval(id);
+  });
+});
+
 // Remember that security is crucial when setting up a server-side API.
 // Make sure to validate user input and sanitize SQL queries to prevent SQL injection attacks.
-
 app.get('/api/generate-username', (req: any, res: any) => {
   const generatedUsername = generateUsername();
   res.json({generatedUsername});
@@ -100,6 +123,6 @@ app.get('/api/quiz/:id/questions/:numQuestions', async (req: any, res: any) => {
 const port = process.env.PORT || 3000;
 
 // Start the node server
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
