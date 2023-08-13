@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
     Table,
     TableBody,
@@ -6,8 +6,8 @@ import {
     TableCell,
     TableHead,
     TableRow,
-} from '@mui/material'
-import { ScoreboardProps } from './types'
+} from '@mui/material';
+import { ScoreboardProps } from './types';
 
 const Scoreboard: React.FC<ScoreboardProps> = ({ userState, setUserState }) => {
     return (
@@ -51,7 +51,7 @@ const Scoreboard: React.FC<ScoreboardProps> = ({ userState, setUserState }) => {
                 </Table>
             </TableContainer>
         </div>
-    )
-}
+    );
+};
 
-export default Scoreboard
+export default Scoreboard;

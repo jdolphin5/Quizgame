@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
     entry: './src/index.tsx', // entry point of React app
@@ -29,4 +29,4 @@ module.exports = {
     }),
   */
     cache: false,
-}
+};

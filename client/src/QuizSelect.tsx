@@ -1,5 +1,5 @@
-import axios from 'axios'
-import React, { useState, useEffect } from 'react'
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import {
     Button,
     FormControl,
@@ -8,10 +8,10 @@ import {
     SelectChangeEvent,
     Slider,
     Typography,
-} from '@mui/material'
-import { QuizSelectProps, Quiz } from './types'
+} from '@mui/material';
+import { QuizSelectProps, Quiz } from './types';
 
-let numQuestions = 5
+let numQuestions = 5;
 
 const QuizSelect: React.FC<QuizSelectProps> = ({
     timerValue,
@@ -25,53 +25,53 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
 }) => {
     //useState hook needed for any value that either effects the rendering of the React component
     //or that does not remain constant over the lifecycle of the component
-    const [quizDataOptions, setQuizDataOptions] = useState<Quiz[] | null>(null)
-    const [selectedQuizId, setSelectedQuizId] = useState<number>(-1)
+    const [quizDataOptions, setQuizDataOptions] = useState<Quiz[] | null>(null);
+    const [selectedQuizId, setSelectedQuizId] = useState<number>(-1);
 
     useEffect(() => {
         axios
             .get(`http://localhost:3000/api/quiz`) // /api/quiz/${quizId}/questions/${numQuestions} route
             .then((response: any) => {
-                console.log(response.data)
-                setQuizDataOptions(response.data) // Update the state with the fetched quiz data
+                console.log(response.data);
+                setQuizDataOptions(response.data); // Update the state with the fetched quiz data
             })
             .catch((error: any) => {
-                console.error('Error fetching quiz data:', error)
-            })
-    }, [])
+                console.error('Error fetching quiz data:', error);
+            });
+    }, []);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        console.log(selectedQuizId)
+        event.preventDefault();
+        console.log(selectedQuizId);
         if (selectedQuizId !== -1) {
-            numQuestions = 5
+            numQuestions = 5;
             axios
                 .get(
                     `http://localhost:3000/api/quiz/${selectedQuizId}/questions/${numQuestions}`
                 ) // /api/quiz/${quizId}/questions/${numQuestions} route
                 .then((response: any) => {
-                    console.log('quiz selected and selected quiz returned')
-                    setQuizData(response.data) // Update the state with the fetched quiz data
-                    setQuizDataFetched(true)
+                    console.log('quiz selected and selected quiz returned');
+                    setQuizData(response.data); // Update the state with the fetched quiz data
+                    setQuizDataFetched(true);
                 })
                 .catch((error: any) => {
-                    console.error('Error fetching quiz data:', error)
-                })
+                    console.error('Error fetching quiz data:', error);
+                });
         }
-    }
+    };
 
     const handleChange = (event: SelectChangeEvent<number>) => {
-        const selectedValue = event.target.value
-        console.log(selectedValue)
+        const selectedValue = event.target.value;
+        console.log(selectedValue);
         if (typeof selectedValue === 'number') {
-            setSelectedQuizId(selectedValue)
+            setSelectedQuizId(selectedValue);
         }
-    }
+    };
 
     const handleSliderChange = (event: Event, newValue: number | number[]) => {
-        setTimerValue(newValue as number)
+        setTimerValue(newValue as number);
         // Other handling logic based on the new value can be added here
-    }
+    };
 
     return (
         <div>
@@ -103,7 +103,7 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
                                             >
                                                 {quizOption.title}
                                             </MenuItem>
-                                        )
+                                        );
                                     })}
                                 </Select>
                             </FormControl>
@@ -138,7 +138,7 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
                 </form>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default QuizSelect
+export default QuizSelect;

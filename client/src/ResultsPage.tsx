@@ -1,5 +1,5 @@
-import React from 'react'
-import { ResultPageProps, Answer, Result } from './types'
+import React from 'react';
+import { ResultPageProps, Answer, Result } from './types';
 import {
     Button,
     Modal,
@@ -9,7 +9,7 @@ import {
     TableCell,
     TableHead,
     TableRow,
-} from '@mui/material'
+} from '@mui/material';
 
 const ResultsPage: React.FC<ResultPageProps> = ({
     userResults,
@@ -18,8 +18,8 @@ const ResultsPage: React.FC<ResultPageProps> = ({
     setShowModal,
 }) => {
     const handleCloseModal = () => {
-        setShowModal(false)
-    }
+        setShowModal(false);
+    };
 
     return (
         <Modal
@@ -99,7 +99,7 @@ const ResultsPage: React.FC<ResultPageProps> = ({
                 </div>
             </Paper>
         </Modal>
-    )
-}
+    );
+};
 
-export default ResultsPage
+export default ResultsPage;

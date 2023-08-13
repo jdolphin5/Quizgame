@@ -1,8 +1,8 @@
-import axios from 'axios'
-import React, { useState, useEffect } from 'react'
-import { UsernameSelectProps, User } from './types'
-import { Button, TextField } from '@mui/material'
-import useWebSocket from 'react-use-websocket'
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { UsernameSelectProps, User } from './types';
+import { Button, TextField } from '@mui/material';
+import useWebSocket from 'react-use-websocket';
 
 const UsernameSelect: React.FC<UsernameSelectProps> = ({
     usernameSelected,
@@ -10,52 +10,52 @@ const UsernameSelect: React.FC<UsernameSelectProps> = ({
     userState,
     setUserState,
 }) => {
-    const [userInput, setUserInput] = useState('')
-    const [myUsername, setMyUsername] = useState<string>('')
-    const [helperText, setHelperText] = useState<string>('')
-    const [usernameError, setUsernameError] = useState<boolean>(false)
-    const [generateUsername, setGenerateUsername] = useState<boolean>(false)
+    const [userInput, setUserInput] = useState('');
+    const [myUsername, setMyUsername] = useState<string>('');
+    const [helperText, setHelperText] = useState<string>('');
+    const [usernameError, setUsernameError] = useState<boolean>(false);
+    const [generateUsername, setGenerateUsername] = useState<boolean>(false);
 
     useEffect(() => {
         if (generateUsername) {
             axios
                 .get(`http://localhost:3000/api/generate-username`)
                 .then((response: any) => {
-                    console.log('username generated' + String(response.data))
-                    setMyUsername(response.data.generatedUsername)
-                    setUserInput(response.data.generatedUsername)
-                    setHelperText('Valid Username')
+                    console.log('username generated' + String(response.data));
+                    setMyUsername(response.data.generatedUsername);
+                    setUserInput(response.data.generatedUsername);
+                    setHelperText('Valid Username');
                 })
                 .catch((error: any) => {
-                    console.error('Error generating username:', error)
-                })
-            setGenerateUsername(false)
+                    console.error('Error generating username:', error);
+                });
+            setGenerateUsername(false);
         }
-    }, [generateUsername])
+    }, [generateUsername]);
 
     const checkUsername = (str: string) => {
-        return /^[A-Za-z0-9_]*$/.test(str)
-    }
+        return /^[A-Za-z0-9_]*$/.test(str);
+    };
 
     const setUsername = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
-        const inputUsername = event.target.value
-        setUserInput(inputUsername)
+        const inputUsername = event.target.value;
+        setUserInput(inputUsername);
         if (inputUsername.length === 0) {
-            setHelperText('Please enter a Username')
-            setUsernameError(false)
+            setHelperText('Please enter a Username');
+            setUsernameError(false);
         } else if (!checkUsername(inputUsername)) {
             setHelperText(
                 'Username can only contain numbers, letters or underscores'
-            )
-            setUsernameError(true)
+            );
+            setUsernameError(true);
         } else {
-            setHelperText('Valid Username')
-            setUsernameError(false)
-            setMyUsername(inputUsername)
+            setHelperText('Valid Username');
+            setUsernameError(false);
+            setMyUsername(inputUsername);
         }
-    }
+    };
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
         if (helperText == 'Valid Username') {
@@ -64,19 +64,19 @@ const UsernameSelect: React.FC<UsernameSelectProps> = ({
                 username: myUsername,
                 question_and_answer: [],
                 score: 0,
-            }
+            };
 
-            setUserState([...userState, myUser])
-            setUsernameSelected(true)
+            setUserState([...userState, myUser]);
+            setUsernameSelected(true);
         }
-    }
+    };
 
-    const WS_URL = `ws://localhost:3000/`
+    const WS_URL = `ws://localhost:3000/`;
     useWebSocket(WS_URL, {
         onOpen: () => {
-            console.log('Websocket connection established.')
+            console.log('Websocket connection established.');
         },
-    })
+    });
 
     return (
         <div>
@@ -101,7 +101,7 @@ const UsernameSelect: React.FC<UsernameSelectProps> = ({
                                     }}
                                     variant="contained"
                                     onClick={() => {
-                                        setGenerateUsername(!generateUsername)
+                                        setGenerateUsername(!generateUsername);
                                     }}
                                 >
                                     Generate Username
@@ -120,7 +120,7 @@ const UsernameSelect: React.FC<UsernameSelectProps> = ({
                 <div id="rss"></div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default UsernameSelect
+export default UsernameSelect;
