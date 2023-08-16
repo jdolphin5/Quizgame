@@ -8,7 +8,7 @@ import {
     RadioGroup,
 } from '@mui/material';
 import { QuestionboardProps, Answer, Question, QandA, Result } from './types';
-import QuestionTimer from './timer';
+import QuestionTimer from './QuestionTimer';
 import ResultsPage from './ResultsPage';
 
 const numQuestions = 5;
@@ -190,6 +190,7 @@ const Questionboard: React.FC<QuestionboardProps> = ({
                     <p>
                         {
                             <QuestionTimer
+                                data-testid="timer"
                                 shouldReset={shouldReset}
                                 timeLimit={timerValue}
                                 onTimeUp={handleTimeUp}
