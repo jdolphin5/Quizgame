@@ -23,16 +23,17 @@ const QuestionTimer: React.FC<QuestionTimerProps> = ({
     }, []);
 
     useEffect(() => {
-        if (secondsRemaining === 0 && !shouldReset) {
-            clearInterval(intervalId!); // ! to indicate that intervalId cannot be null here
+        if (secondsRemaining === 0) {
+            if (!shouldReset) {
+                clearInterval(intervalId!); // ! to indicate that intervalId cannot be null here
+            } else {
+                setSecondsRemaining(timeLimit);
+            }
             onTimeUp();
-        } else if (secondsRemaining === 0 && shouldReset) {
-            onTimeUp();
-            setSecondsRemaining(timeLimit);
         }
     }, [secondsRemaining, intervalId, onTimeUp]);
 
-    return <div data-testid="timer">{secondsRemaining}</div>;
+    return <div data-testid="question-timer">{secondsRemaining}</div>;
 };
 
 export default QuestionTimer;
