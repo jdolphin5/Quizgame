@@ -11,6 +11,7 @@ const App: React.FC = () => {
     const [quizData, setQuizData] = useState<QuizData | null>(null);
     const [quizDataFetched, setQuizDataFetched] = useState(false);
     const [timerValue, setTimerValue] = useState<number>(10);
+    const [numberOfQuestions, setNumberOfQuestions] = useState<number>(5);
 
     return (
         <div className="root">
@@ -28,6 +29,8 @@ const App: React.FC = () => {
                     <QuizSelect
                         timerValue={timerValue}
                         setTimerValue={setTimerValue}
+                        numberOfQuestions={numberOfQuestions}
+                        setNumberOfQuestions={setNumberOfQuestions}
                         quizDataFetched={quizDataFetched}
                         setQuizDataFetched={setQuizDataFetched}
                         quizData={quizData}
@@ -41,6 +44,8 @@ const App: React.FC = () => {
                     <Questionboard
                         timerValue={timerValue}
                         setTimerValue={setTimerValue}
+                        numberOfQuestions={numberOfQuestions}
+                        setNumberOfQuestions={setNumberOfQuestions}
                         quizData={quizData}
                         setQuizData={setQuizData}
                         userState={userState}

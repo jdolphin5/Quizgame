@@ -11,11 +11,11 @@ import { QuestionboardProps, Answer, Question, QandA, Result } from './types';
 import QuestionTimer from './QuestionTimer';
 import ResultsPage from './ResultsPage';
 
-const numQuestions = 5;
-
 const Questionboard: React.FC<QuestionboardProps> = ({
     timerValue,
     setTimerValue,
+    numberOfQuestions,
+    setNumberOfQuestions,
     quizData,
     setQuizData,
     userState,
@@ -56,7 +56,7 @@ const Questionboard: React.FC<QuestionboardProps> = ({
                 }
             });
 
-            if (questionNumber >= numQuestions - 1) {
+            if (questionNumber >= numberOfQuestions - 1) {
                 setShouldReset(false);
             }
 
@@ -80,7 +80,7 @@ const Questionboard: React.FC<QuestionboardProps> = ({
     //when the timer runs out, update userState accordingly
     useEffect(() => {
         if (timerLapsed) {
-            if (questionNumber < numQuestions - 1) {
+            if (questionNumber < numberOfQuestions - 1) {
                 //questionNumber from 0 to numQuestions-1
                 setQuestionNumber(questionNumber + 1);
             } else {
