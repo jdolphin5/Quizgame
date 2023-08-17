@@ -31,7 +31,7 @@ const QuestionTimer: React.FC<QuestionTimerProps> = ({
             }
             onTimeUp();
         }
-    }, [secondsRemaining, intervalId, onTimeUp]);
+    }, [secondsRemaining]);
 
     return <div data-testid="question-timer">{secondsRemaining}</div>;
 };
