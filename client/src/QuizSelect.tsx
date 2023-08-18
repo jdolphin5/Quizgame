@@ -153,7 +153,7 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
                                 step={1}
                                 marks
                                 min={1}
-                                max={30}
+                                max={20}
                             />
                         </div>
                         <div className="quizSelect-row-4-col-1">
