@@ -49,10 +49,10 @@ const Questionboard: React.FC<QuestionboardProps> = ({
             let answers = quizData.answers.filter(
                 (ans) => ans.question_id === currentQuestion.question_id
             );
-            let correctAnsId: number = 0;
+            let localCorrectAnsId: number = 0;
             answers.forEach((answer) => {
                 if (answer.is_correct) {
-                    correctAnsId = answer.answer_id;
+                    localCorrectAnsId = answer.answer_id;
                 }
             });
 
@@ -63,7 +63,7 @@ const Questionboard: React.FC<QuestionboardProps> = ({
             setHasAnsweredQuestion(false);
             setQuestion(currentQuestion);
             setAnswers(answers);
-            setCorrectAnsId(correctAnsId);
+            setCorrectAnsId(localCorrectAnsId);
             setQuizTitle(quizData.quiz.title);
             setShuffledAnswers([]);
         }
@@ -152,7 +152,7 @@ const Questionboard: React.FC<QuestionboardProps> = ({
         }
         return array;
     };
-
+    console.log('question number: '.concat(String(questionNumber)));
     console.log(correctAnsId);
 
     const addToResults = (
@@ -181,38 +181,43 @@ const Questionboard: React.FC<QuestionboardProps> = ({
     };
 
     return (
-        <div>
+        <div data-testid="questionBoard">
             <div className="header2">
-                <div className="gameName">Quiz Game</div>
-                <div className="quizName">{quizTitle}</div>
+                <div className="gameName" data-testid="gameName">
+                    Quiz Game
+                </div>
+                <div className="quizName" data-testid="quizName">
+                    {quizTitle}
+                </div>
                 <div className="timer">
                     Timer:{' '}
-                    <p>
+                    <div className="timerInner">
                         {
                             <QuestionTimer
-                                data-testid="timer"
                                 shouldReset={shouldReset}
                                 timeLimit={timerValue}
                                 onTimeUp={handleTimeUp}
                             />
                         }
-                    </p>
+                    </div>
                 </div>
             </div>
             <div className="body2">
                 <h2>Question {questionNumber + 1}</h2>
-                <h2>{question?.question_text}</h2>
+                <h2 data-testid="questionText">{question?.question_text}</h2>
 
-                <FormControl>
-                    <FormLabel id="questionForm">
+                <FormControl data-testid="formControl">
+                    <FormLabel id="questionForm" data-testid="formLabel">
                         <h2>Answers:</h2>
                     </FormLabel>
                     <RadioGroup
                         aria-labelledby="questionLabel"
                         name="radio-buttons-group"
+                        data-testid="radioGroup"
                     >
                         {shuffledAnswers.map((answer, i) => (
                             <FormControlLabel
+                                data-testid={answer.answer_id}
                                 key={answer.answer_id}
                                 value={answer.answer_id}
                                 control={<Radio />}
@@ -222,17 +227,23 @@ const Questionboard: React.FC<QuestionboardProps> = ({
                         ))}
                     </RadioGroup>
                 </FormControl>
-                <div className="showHideQuizComplete">
+                <div
+                    className="showHideQuizComplete"
+                    data-testid="showHideQuizComplete"
+                >
                     {quizComplete ? (
                         <Button
                             variant="contained"
                             color="primary"
                             onClick={handleShowModal}
+                            data-testid="modalButton"
                         >
                             Show Results
                         </Button>
                     ) : (
-                        <h4>Please select an answer above</h4>
+                        <h4 data-testid="questionSubtext">
+                            Please select an answer above
+                        </h4>
                     )}
                 </div>
             </div>
@@ -242,6 +253,7 @@ const Questionboard: React.FC<QuestionboardProps> = ({
                     userState={userState}
                     showModal={showModal}
                     setShowModal={setShowModal}
+                    data-testid="resultsPage"
                 />
             )}
         </div>
