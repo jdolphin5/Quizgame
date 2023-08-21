@@ -23,20 +23,20 @@ const Questionboard: React.FC<QuestionboardProps> = ({
 }) => {
     //useState hook needed for any value that either effects the rendering of the React component
     //or that does not remain constant over the lifecycle of the component
-    const [quizTitle, setQuizTitle] = useState<string>('');
+    const [quizTitle, setQuizTitle] = useState<string>(''); //can remove this
     const [questionNumber, setQuestionNumber] = useState<number>(0);
     const [question, setQuestion] = useState<Question | null>(null);
     const [answers, setAnswers] = useState<Answer[]>([]);
-    const [shuffledAnswers, setShuffledAnswers] = useState<Answer[]>([]);
-    const [correctAnsId, setCorrectAnsId] = useState<number>(0);
+    const [shuffledAnswers, setShuffledAnswers] = useState<Answer[]>([]); //can make this a normal const <Answer[]>
+    const [correctAnsId, setCorrectAnsId] = useState<number>(0); // can make this a const <number>
     const [hasAnsweredQuestion, setHasAnsweredQuestion] =
-        useState<boolean>(false);
-    const [selectedAnswer, setSelectedAnswer] = useState<number>(-1);
+        useState<boolean>(false); //can make this a const <boolean>
+    const [selectedAnswer, setSelectedAnswer] = useState<number>(-1); //can make this a const <number>
     const [timerLapsed, setTimerLapsed] = useState<boolean>(false);
-    const [shouldReset, setShouldReset] = useState<boolean>(true);
+    const [shouldReset, setShouldReset] = useState<boolean>(true); //can make this a const <boolean> as it depends on questionNumber and numberOfQuestions
     const [quizComplete, setQuizComplete] = useState<boolean>(false);
-    const [showModal, setShowModal] = useState<boolean>(false);
-    const [userResults, setUserResults] = useState<Result[]>([]);
+    const [showModal, setShowModal] = useState<boolean>(false); //try making this a const <boolean> and see if you can conditionally render the modal button
+    const [userResults, setUserResults] = useState<Result[]>([]); //try making this a const <Result[]> and see if you can conditionally render the modal button
 
     //every time the question number is updated, grab the question and answers and correctanswer's id
     useEffect(() => {
@@ -187,7 +187,7 @@ const Questionboard: React.FC<QuestionboardProps> = ({
                     Quiz Game
                 </div>
                 <div className="quizName" data-testid="quizName">
-                    {quizTitle}
+                    {quizData.quiz.title}
                 </div>
                 <div className="timer">
                     Timer:{' '}
