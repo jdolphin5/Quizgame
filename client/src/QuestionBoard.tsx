@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-    Button,
-    FormControl,
-    FormControlLabel,
-    FormLabel,
-    Radio,
-    RadioGroup,
-} from '@mui/material';
+import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import { QuestionboardProps, Answer, Question, QandA, Result } from './types';
 import QuestionTimer from './QuestionTimer';
 import ResultsPage from './ResultsPage';
@@ -23,32 +16,24 @@ const Questionboard: React.FC<QuestionboardProps> = ({
 }) => {
     //useState hook needed for any value that either effects the rendering of the React component
     //or that does not remain constant over the lifecycle of the component
-    const [quizTitle, setQuizTitle] = useState<string>(''); //can remove this
     const [questionNumber, setQuestionNumber] = useState<number>(0);
     const [question, setQuestion] = useState<Question | null>(null);
     const [answers, setAnswers] = useState<Answer[]>([]);
-    const [shuffledAnswers, setShuffledAnswers] = useState<Answer[]>([]); //can make this a normal const <Answer[]>
-    const [correctAnsId, setCorrectAnsId] = useState<number>(0); // can make this a const <number>
-    const [hasAnsweredQuestion, setHasAnsweredQuestion] =
-        useState<boolean>(false); //can make this a const <boolean>
-    const [selectedAnswer, setSelectedAnswer] = useState<number>(-1); //can make this a const <number>
+    const [shuffledAnswers, setShuffledAnswers] = useState<Answer[]>([]);
+    const [correctAnsId, setCorrectAnsId] = useState<number>(0);
+    const [hasAnsweredQuestion, setHasAnsweredQuestion] = useState<boolean>(false); //can make this a const <boolean>
+    const [selectedAnswer, setSelectedAnswer] = useState<number>(-1);
     const [timerLapsed, setTimerLapsed] = useState<boolean>(false);
-    const [shouldReset, setShouldReset] = useState<boolean>(true); //can make this a const <boolean> as it depends on questionNumber and numberOfQuestions
     const [quizComplete, setQuizComplete] = useState<boolean>(false);
-    const [showModal, setShowModal] = useState<boolean>(false); //try making this a const <boolean> and see if you can conditionally render the modal button
-    const [userResults, setUserResults] = useState<Result[]>([]); //try making this a const <Result[]> and see if you can conditionally render the modal button
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [userResults, setUserResults] = useState<Result[]>([]);
+    const shouldReset: boolean = questionNumber >= numberOfQuestions - 1 ? false : true;
 
     //every time the question number is updated, grab the question and answers and correctanswer's id
     useEffect(() => {
-        if (
-            quizData &&
-            questionNumber >= 0 &&
-            questionNumber < quizData.questions.length
-        ) {
+        if (quizData && questionNumber >= 0 && questionNumber < quizData.questions.length) {
             let currentQuestion = quizData.questions[questionNumber];
-            let answers = quizData.answers.filter(
-                (ans) => ans.question_id === currentQuestion.question_id
-            );
+            let answers = quizData.answers.filter((ans) => ans.question_id === currentQuestion.question_id);
             let localCorrectAnsId: number = 0;
             answers.forEach((answer) => {
                 if (answer.is_correct) {
@@ -56,15 +41,10 @@ const Questionboard: React.FC<QuestionboardProps> = ({
                 }
             });
 
-            if (questionNumber >= numberOfQuestions - 1) {
-                setShouldReset(false);
-            }
-
             setHasAnsweredQuestion(false);
             setQuestion(currentQuestion);
             setAnswers(answers);
             setCorrectAnsId(localCorrectAnsId);
-            setQuizTitle(quizData.quiz.title);
             setShuffledAnswers([]);
         }
     }, [questionNumber, quizData]);
@@ -74,6 +54,7 @@ const Questionboard: React.FC<QuestionboardProps> = ({
         if (quizData && shuffledAnswers.length === 0) {
             setShuffledAnswers(shuffleAnswers(answers));
         }
+
         setTimerLapsed(false);
     }, [answers]);
 
@@ -114,20 +95,23 @@ const Questionboard: React.FC<QuestionboardProps> = ({
                         question_id: question.question_id,
                         answer_id: selectedAnswerId,
                     };
+
                     questionAnswer.push(pair);
                     const updatedUser = {
                         ...myUser,
                         question_and_answer: questionAnswer,
                         score: myScore,
                     };
+
                     const updatedUsers = userState.map((user) =>
                         user.user_id === myUser.user_id ? updatedUser : user
                     );
+
                     setUserState(updatedUsers);
                     console.log(updatedUser);
                 }
-                if (question !== null)
-                    addToResults(question, shuffledAnswers, selectedAnswerId);
+
+                if (question !== null) addToResults(question, shuffledAnswers, selectedAnswerId);
             }
 
             setSelectedAnswer(-1);
@@ -155,11 +139,7 @@ const Questionboard: React.FC<QuestionboardProps> = ({
     console.log('question number: '.concat(String(questionNumber)));
     console.log(correctAnsId);
 
-    const addToResults = (
-        questionToAdd: Question,
-        shuffledAnswersToAdd: Answer[],
-        selectedAnswerIdToAdd: number
-    ) => {
+    const addToResults = (questionToAdd: Question, shuffledAnswersToAdd: Answer[], selectedAnswerIdToAdd: number) => {
         const result: Result = {
             question: questionToAdd,
             answers: shuffledAnswersToAdd,
@@ -192,13 +172,7 @@ const Questionboard: React.FC<QuestionboardProps> = ({
                 <div className="timer">
                     Timer:{' '}
                     <div className="timerInner">
-                        {
-                            <QuestionTimer
-                                shouldReset={shouldReset}
-                                timeLimit={timerValue}
-                                onTimeUp={handleTimeUp}
-                            />
-                        }
+                        {<QuestionTimer shouldReset={shouldReset} timeLimit={timerValue} onTimeUp={handleTimeUp} />}
                     </div>
                 </div>
             </div>
@@ -210,11 +184,7 @@ const Questionboard: React.FC<QuestionboardProps> = ({
                     <FormLabel id="questionForm" data-testid="formLabel">
                         <h2>Answers:</h2>
                     </FormLabel>
-                    <RadioGroup
-                        aria-labelledby="questionLabel"
-                        name="radio-buttons-group"
-                        data-testid="radioGroup"
-                    >
+                    <RadioGroup aria-labelledby="questionLabel" name="radio-buttons-group" data-testid="radioGroup">
                         {shuffledAnswers.map((answer, i) => (
                             <FormControlLabel
                                 data-testid={answer.answer_id}
@@ -227,23 +197,13 @@ const Questionboard: React.FC<QuestionboardProps> = ({
                         ))}
                     </RadioGroup>
                 </FormControl>
-                <div
-                    className="showHideQuizComplete"
-                    data-testid="showHideQuizComplete"
-                >
+                <div className="showHideQuizComplete" data-testid="showHideQuizComplete">
                     {quizComplete ? (
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleShowModal}
-                            data-testid="modalButton"
-                        >
+                        <Button variant="contained" color="primary" onClick={handleShowModal} data-testid="modalButton">
                             Show Results
                         </Button>
                     ) : (
-                        <h4 data-testid="questionSubtext">
-                            Please select an answer above
-                        </h4>
+                        <h4 data-testid="questionSubtext">Please select an answer above</h4>
                     )}
                 </div>
             </div>
