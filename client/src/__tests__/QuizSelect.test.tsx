@@ -1,10 +1,10 @@
 import React from 'react';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import QuizSelect from '../QuizSelect';
 import { QuizData, User } from '../types';
 
-beforeEach(() => {});
+//beforeEach(() => {});
 
 afterEach(() => {
     cleanup(); // Resets the DOM after each test suite
