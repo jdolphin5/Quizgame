@@ -1,14 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import {
-    Button,
-    FormControl,
-    MenuItem,
-    Select,
-    SelectChangeEvent,
-    Slider,
-    Typography,
-} from '@mui/material';
+import { Button, FormControl, MenuItem, Select, SelectChangeEvent, Slider, Typography } from '@mui/material';
 import { QuizSelectProps, Quiz } from './types';
 
 const QuizSelect: React.FC<QuizSelectProps> = ({
@@ -28,6 +20,7 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
     const [quizDataOptions, setQuizDataOptions] = useState<Quiz[] | null>(null);
     const [selectedQuizId, setSelectedQuizId] = useState<number>(-1);
 
+    //use axios get API call to return all the data from the quiz table
     useEffect(() => {
         axios
             .get(`http://localhost:3000/api/quiz`) // /api/quiz/${quizId}/questions/${numQuestions} route
@@ -40,6 +33,11 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
             });
     }, []);
 
+    //set the initial value of the select dropdown box to the first quiz returned from API call
+    useEffect(() => {
+        if (quizDataOptions !== null) setSelectedQuizId(quizDataOptions[0].quiz_id);
+    }, [quizDataOptions]);
+
     const handleSelectChange = (event: SelectChangeEvent<number>) => {
         const selectedValue = event.target.value;
         console.log(selectedValue);
@@ -48,11 +46,7 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
         }
     };
 
-    const handleSliderChange = (
-        name: string,
-        event: Event,
-        newValue: number | number[]
-    ) => {
+    const handleSliderChange = (name: string, event: Event, newValue: number | number[]) => {
         if (name === 'timer') {
             setTimerValue(newValue as number);
         } else if (name === 'numberOfQuestions') {
@@ -65,9 +59,7 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
         console.log(selectedQuizId);
         if (selectedQuizId !== -1) {
             axios
-                .get(
-                    `http://localhost:3000/api/quiz/${selectedQuizId}/questions/${numberOfQuestions}`
-                ) // /api/quiz/${quizId}/questions/${numQuestions} route
+                .get(`http://localhost:3000/api/quiz/${selectedQuizId}/questions/${numberOfQuestions}`) // /api/quiz/${quizId}/questions/${numQuestions} route
                 .then((response: any) => {
                     console.log('quiz selected and selected quiz returned');
                     setQuizData(response.data); // Update the state with the fetched quiz data
@@ -80,33 +72,38 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
     };
 
     return (
-        <div>
+        <div data-testid="quizSelect">
             <div className="header2">
-                <div className="gameName">Quiz Game</div>
-                <div className="quizName">Select Quiz</div>
-                <div className="timer"></div>
+                <div className="gameName" data-testid="gameName">
+                    Quiz Game
+                </div>
+                <div className="quizName" data-testid="quizName">
+                    Select Quiz
+                </div>
             </div>
             <div className="body2">
                 <form autoComplete="off" onSubmit={handleSubmit}>
-                    <div className="quizSelectContainer">
-                        <div className="quizSelect-row-1-col-1">
-                            <Typography id="quiz-dropdown" gutterBottom>
+                    <div className="quizSelectContainer" data-testid="quizSelectContainer">
+                        <div className="quizSelect-row-1-col-1" data-testid="quizSelect-row-1-col-1">
+                            <Typography
+                                id="quizSelect-dropdown-text"
+                                data-testid="quizSelect-dropdown-text"
+                                gutterBottom
+                            >
                                 Select a quiz topic
                             </Typography>
                         </div>
-                        <div className="quizSelect-row-1-col-2">
+                        <div className="quizSelect-row-1-col-2" data-testid="quizSelect-row-1-col-2">
                             <FormControl>
                                 <Select
                                     labelId="simple-select-label"
-                                    value={selectedQuizId}
+                                    value={selectedQuizId === -1 ? '' : selectedQuizId}
                                     onChange={handleSelectChange}
+                                    data-testid="selectQuiz"
                                 >
                                     {quizDataOptions?.map((quizOption) => {
                                         return (
-                                            <MenuItem
-                                                key={quizOption.quiz_id}
-                                                value={quizOption.quiz_id}
-                                            >
+                                            <MenuItem key={quizOption.quiz_id} value={quizOption.quiz_id}>
                                                 {quizOption.title}
                                             </MenuItem>
                                         );
@@ -114,54 +111,48 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
                                 </Select>
                             </FormControl>
                         </div>
-                        <div className="quizSelect-row-2-col-1">
-                            <Typography id="slider" gutterBottom>
+                        <div className="quizSelect-row-2-col-1" data-testid="quizSelect-row-2-col-1">
+                            <Typography id="quizSelect-timer-text" data-testid="quizSelect-timer-text" gutterBottom>
                                 Timer (seconds): {timerValue}
                             </Typography>
                         </div>
-                        <div className="quizSelect-row-2-col-2">
+                        <div className="quizSelect-row-2-col-2" data-testid="quizSelect-grid22">
                             <Slider
                                 aria-label="Slider"
-                                onChange={(event, newValue) =>
-                                    handleSliderChange('timer', event, newValue)
-                                }
+                                onChange={(event, newValue) => handleSliderChange('timer', event, newValue)}
                                 valueLabelDisplay="off"
                                 defaultValue={10}
                                 step={5}
                                 marks
                                 min={5}
                                 max={20}
+                                data-testid="quizSelect-slider1"
                             />
                         </div>
-                        <div className="quizSelect-row-3-col-1">
-                            <Typography id="slider" gutterBottom>
+                        <div className="quizSelect-row-3-col-1" data-testid="quizSelect-grid31">
+                            <Typography
+                                id="quizSelect-number-of-questions-text"
+                                data-testid="quizSelect-number-of-questions-text"
+                                gutterBottom
+                            >
                                 Number of Questions: {numberOfQuestions}
                             </Typography>
                         </div>
-                        <div className="quizSelect-row-3-col-2">
+                        <div className="quizSelect-row-3-col-2" data-testid="quizSelect-grid32">
                             <Slider
                                 aria-label="Slider"
-                                onChange={(event, newValue) =>
-                                    handleSliderChange(
-                                        'numberOfQuestions',
-                                        event,
-                                        newValue
-                                    )
-                                }
+                                onChange={(event, newValue) => handleSliderChange('numberOfQuestions', event, newValue)}
                                 valueLabelDisplay="off"
                                 defaultValue={5}
                                 step={1}
                                 marks
                                 min={1}
                                 max={20}
+                                data-testid="quizSelect-slider2"
                             />
                         </div>
-                        <div className="quizSelect-row-4-col-1">
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                type="submit"
-                            >
+                        <div className="quizSelect-row-4-col-1" data-testid="quizSelect-grid41">
+                            <Button variant="contained" color="primary" type="submit" data-testid="quizSelect-button">
                                 Start Quiz
                             </Button>
                         </div>
