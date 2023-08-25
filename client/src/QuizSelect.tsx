@@ -84,7 +84,7 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
             <div className="body2">
                 <form autoComplete="off" onSubmit={handleSubmit}>
                     <div className="quizSelectContainer" data-testid="quizSelectContainer">
-                        <div className="quizSelect-row-1-col-1" data-testid="quizSelect-row-1-col-1">
+                        <div className="quizSelect-grid11" data-testid="quizSelect-grid11">
                             <Typography
                                 id="quizSelect-dropdown-text"
                                 data-testid="quizSelect-dropdown-text"
@@ -93,13 +93,13 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
                                 Select a quiz topic
                             </Typography>
                         </div>
-                        <div className="quizSelect-row-1-col-2" data-testid="quizSelect-row-1-col-2">
+                        <div className="quizSelect-grid12" data-testid="quizSelect-grid12">
                             <FormControl>
                                 <Select
                                     labelId="simple-select-label"
                                     value={selectedQuizId === -1 ? '' : selectedQuizId}
                                     onChange={handleSelectChange}
-                                    data-testid="selectQuiz"
+                                    data-testid="quizSelect-select"
                                 >
                                     {quizDataOptions?.map((quizOption) => {
                                         return (
@@ -111,12 +111,12 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
                                 </Select>
                             </FormControl>
                         </div>
-                        <div className="quizSelect-row-2-col-1" data-testid="quizSelect-row-2-col-1">
+                        <div className="quizSelect-grid21" data-testid="quizSelect-grid21">
                             <Typography id="quizSelect-timer-text" data-testid="quizSelect-timer-text" gutterBottom>
                                 Timer (seconds): {timerValue}
                             </Typography>
                         </div>
-                        <div className="quizSelect-row-2-col-2" data-testid="quizSelect-grid22">
+                        <div className="quizSelect-grid22" data-testid="quizSelect-grid22">
                             <Slider
                                 aria-label="Slider"
                                 onChange={(event, newValue) => handleSliderChange('timer', event, newValue)}
@@ -129,7 +129,7 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
                                 data-testid="quizSelect-slider1"
                             />
                         </div>
-                        <div className="quizSelect-row-3-col-1" data-testid="quizSelect-grid31">
+                        <div className="quizSelect-grid31" data-testid="quizSelect-grid31">
                             <Typography
                                 id="quizSelect-number-of-questions-text"
                                 data-testid="quizSelect-number-of-questions-text"
@@ -138,7 +138,7 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
                                 Number of Questions: {numberOfQuestions}
                             </Typography>
                         </div>
-                        <div className="quizSelect-row-3-col-2" data-testid="quizSelect-grid32">
+                        <div className="quizSelect-grid32" data-testid="quizSelect-grid32">
                             <Slider
                                 aria-label="Slider"
                                 onChange={(event, newValue) => handleSliderChange('numberOfQuestions', event, newValue)}
@@ -151,7 +151,7 @@ const QuizSelect: React.FC<QuizSelectProps> = ({
                                 data-testid="quizSelect-slider2"
                             />
                         </div>
-                        <div className="quizSelect-row-4-col-1" data-testid="quizSelect-grid41">
+                        <div className="quizSelect-grid41" data-testid="quizSelect-grid41">
                             <Button variant="contained" color="primary" type="submit" data-testid="quizSelect-button">
                                 Start Quiz
                             </Button>
