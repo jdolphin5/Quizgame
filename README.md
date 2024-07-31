@@ -1,5 +1,5 @@
 # quizgame
-This is a public repo for the code of a Quiz Game using PostgreSQL, Express, React, Node, Webpack
+Code of a Quiz Game using the PERN stack - PostgreSQL, Express, React, Node
 
 ## Setup Instructions:
 Git pull the repo
